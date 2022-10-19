@@ -17,10 +17,8 @@ export default function Form() {
       return {
         ...prevFormData,
         [name]: type === "checkbox" ? checked : value
-
       }
-    }
-    )
+    })
   }
 
  
@@ -35,7 +33,16 @@ export default function Form() {
       if (formData.newsletter === true) {
         console.log("Thanks for signing up for our newsletter")
       }
+  }
 
+  const [alertMessage, setAlertMessage] = React.useState("")
+
+  function signalWrongPassword() {
+    let wrongPassword = document.getElementsByClassName("form-input")[2];
+    if (formData.password != formData.confirmPassword){
+      wrongPassword.classList.toggle("form-input-confirm-password")
+      setAlertMessage("Incorrectly confirmed password")
+    }
   }
 
   return (
@@ -60,15 +67,14 @@ export default function Form() {
         />
 
         <input
-          className="form-input-confirm-password"
+          className="form-input"
           type="password"
           value={formData.confirmPassword}
           onChange={handleChange}
           name="confirmPassword"
           placeholder="Confirm password"
-
         />
-        
+        <p className="alert-message">{alertMessage}</p>
         <div className="form-newsletter">
           <input
             type="checkbox"
@@ -80,7 +86,7 @@ export default function Form() {
           />
           <label htmlFor="newsletter">I want to join the newsletter</label>
         </div>
-        <button className="form-submit-button">Sign up</button>
+        <button onClick={signalWrongPassword} className="form-submit-button">Sign up</button>
       </form>
     </div>
   )
