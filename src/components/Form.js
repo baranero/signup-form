@@ -54,7 +54,7 @@ export default function Form() {
           value={formData.email}
           onChange={handleChange}
           name="email"
-          placeholder="E-Mail"
+          placeholder="E-mail"
         />
 
         <input
